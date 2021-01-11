@@ -1,0 +1,1 @@
+https://forum.unity.com/threads/navmesh-example-ai.127492/
