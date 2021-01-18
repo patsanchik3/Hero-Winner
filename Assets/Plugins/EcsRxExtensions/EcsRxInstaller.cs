@@ -37,10 +37,21 @@ namespace Plugins.EcsRxExtensions
 
         public override void InstallBindings()
         {
+            var sceneContexts = FindObjectsOfType<SceneContext>();
+            var sceneContext = sceneContexts.FirstOrDefault();
+            
+            if(sceneContext == null) 
+            { throw new Exception("Cannot find SceneContext, please make sure one is on the scene"); }
+            
+            sceneContext.PostInstall += OnZenjectReady;
+        }
+
+        private void OnZenjectReady()
+        {
             Container = new ZenjectDependencyContainer(_diContainer);
             StartApplication();
         }
-        
+
         public void Dispose()
         {
             StopApplication();
