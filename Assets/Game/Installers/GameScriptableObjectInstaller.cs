@@ -8,9 +8,11 @@ namespace Game.Installers
     public class GameScriptableObjectInstaller : ScriptableObjectInstaller<GameScriptableObjectInstaller>
     {
         [SerializeField] private PrefabSettings _prefabSettings; 
+        [SerializeField] private GameSettings _gameSettings; 
         public override void InstallBindings()
         {
             Container.Bind<IPrefabSettings>().FromInstance(_prefabSettings);
+            Container.Bind<IGameSettings>().FromInstance(_gameSettings);
         }
     }
 }

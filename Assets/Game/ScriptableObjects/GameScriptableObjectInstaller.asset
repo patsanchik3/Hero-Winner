@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameScriptableObjectInstaller
   m_EditorClassIdentifier: 
   _prefabSettings: {fileID: 11400000, guid: c86146f40a5844df4bd94e4593828528, type: 2}
+  _gameSettings: {fileID: 11400000, guid: 68f763b41b050464bb48d595db892b56, type: 2}
