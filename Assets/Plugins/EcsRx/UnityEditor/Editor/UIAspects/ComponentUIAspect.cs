@@ -52,11 +52,11 @@ namespace EcsRx.UnityEditor.Editor.UIAspects
                 EditorGUILayout.BeginHorizontal();
                 var propertyType = property.PropertyType;
                 var propertyValue = property.GetValue(component, null);
-
+                
                 var handler = DefaultEditorInputRegistry.GetHandlerFor(propertyType);
                 if (handler == null)
                 {
-                    //Debug.LogWarning("This type is not supported: " + propertyType.Name + " - In component: " + component.GetType().Name);
+                    Debug.LogWarning("This type is not supported: " + propertyType.Name + " - In component: " + component.GetType().Name);
                     EditorGUILayout.EndHorizontal();
                     continue;
                 }

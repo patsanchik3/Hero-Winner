@@ -28,7 +28,6 @@ namespace Game.ViewResolvers
 
         public override GameObject CreateView(IEntity entity)
         {
-            Debug.Log("BotViewResolver");
             var prefab = _prefabSettings.GetBotPrefab;
             var gameObject = Object.Instantiate(prefab, Vector3.zero, Quaternion.identity);
             gameObject.name = $"Bot-{entity.Id}";

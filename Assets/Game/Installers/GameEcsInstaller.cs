@@ -1,7 +1,6 @@
 ﻿using Game.Systems;
 using Game.ViewResolvers;
 using Plugins.EcsRxExtensions;
-using Zenject;
 
 namespace Game.Installers
 {
@@ -11,6 +10,7 @@ namespace Game.Installers
         {
             this.BindSystem<BotSpawnSystem>();
             this.BindSystem<BotViewResolver>();
+            this.BindSystem<AiStateDieReactiveSystem>();
         }
     }
 }

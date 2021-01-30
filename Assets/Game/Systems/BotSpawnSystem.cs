@@ -22,8 +22,6 @@ namespace Game.Systems
         
         public void StartSystem(IObservableGroup observableGroup)
         {
-            Debug.Log($"{GetType().Name} Start need spawn bot");
-
             var entityPool = _entityDatabase.GetCollection();
             entityPool.CreateEntity(_botBlueprint);
         }
