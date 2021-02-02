@@ -8,12 +8,19 @@ namespace Game.Blueprints
 {
     public class BotBlueprint : IBotBlueprint
     {
+        private readonly EAiState _startState;
+
+        public BotBlueprint(EAiState startState)
+        {
+            _startState = startState;
+        }
+
         public void Apply(IEntity entity)
         {
             entity.AddComponent<BotComponent>();
             entity.AddComponent<ViewComponent>();
             var aiState = entity.AddComponent<AiStateComponent>();
-            aiState.State.Value = EAiStates.Die;
+            aiState.State.Value = _startState;
         }
     }
 }

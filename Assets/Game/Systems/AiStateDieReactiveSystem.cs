@@ -7,8 +7,10 @@ using EcsRx.Groups.Observable;
 using EcsRx.Plugins.ReactiveSystems.Systems;
 using EcsRx.Systems;
 using Game.Components;
+using Game.Enums;
 using Game.Settings;
 using UniRx;
+using UnityEngine;
 
 namespace Game.Systems
 {
@@ -38,14 +40,15 @@ namespace Game.Systems
         public IObservable<IEntity> ReactToEntity(IEntity entity)
         {
             var aiStateComponent = entity.GetComponent<AiStateComponent>();
-            return aiStateComponent.State.DistinctUntilChanged().Select(x => entity);
+            return aiStateComponent.State.DistinctUntilChanged().Where(x => x == EAiState.Die).Select(x => entity);
         }
 
         public void Process(IEntity entity)
         {
-            var animator = entity.GetComponent<BotViewComponent>().BotView.GetAnimator;
-            animator.SetTrigger(AnimationStates.Die);
-
+            Debug.Log("Process");
+            var botView =  entity.GetComponent<BotViewComponent>().BotView;
+            botView.PlayAnimation(AnimationStates.Die);
+            
             Observable.Timer(TimeSpan.FromSeconds(_gameSettings.DestroyBotTimeSeconds))
                 .Subscribe(_ => DestroyEntity(entity))
                 .AddTo(_disposable);

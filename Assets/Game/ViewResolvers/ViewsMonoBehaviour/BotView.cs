@@ -3,13 +3,26 @@ using UnityEngine;
 namespace Game.ViewResolvers.ViewsMonoBehaviour
 {
     [RequireComponent(typeof(Animator))]
-    public class BotView : MonoBehaviour
+    public class BotView : MonoBehaviour, IBotView
     {
-        public Animator GetAnimator => _animator;
-        private Animator _animator;
-        private void Awake()
+        public int LastAnimationHash { get; private set; }
+        public Animator GetAnimator
         {
-            _animator = GetComponent<Animator>();
+            get
+            {
+                if (_animator == null)
+                    _animator = GetComponent<Animator>();
+                
+                return _animator;
+            }
+        }
+
+        private Animator _animator;
+        
+        public void PlayAnimation(int hash)
+        {
+            LastAnimationHash = hash;
+            GetAnimator.SetTrigger(hash);
         }
     }
 }

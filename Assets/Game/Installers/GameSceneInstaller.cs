@@ -1,4 +1,5 @@
 using Game.Blueprints;
+using Game.Enums;
 using Zenject;
 
 namespace Game.Installers
@@ -7,7 +8,7 @@ namespace Game.Installers
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesAndSelfTo<BotBlueprint>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BotBlueprint>().AsSingle().WithArguments(EAiState.Die);
         }
     }
 }

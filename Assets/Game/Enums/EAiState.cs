@@ -1,6 +1,6 @@
 namespace Game.Enums
 {
-    public enum EAiStates
+    public enum EAiState
     {
         Idle, Motion, Die, Damage, Attack
     }

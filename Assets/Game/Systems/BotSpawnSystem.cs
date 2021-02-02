@@ -3,7 +3,6 @@ using EcsRx.Groups;
 using EcsRx.Groups.Observable;
 using EcsRx.Systems;
 using Game.Blueprints;
-using UnityEngine;
 
 namespace Game.Systems
 {

@@ -35,7 +35,7 @@ namespace Game.ViewResolvers
             var botView = gameObject.GetComponent<BotView>();
             var botViewComponent = entity.AddComponent<BotViewComponent>();
             botViewComponent.BotView = botView;
-
+            
             return gameObject;
         }
 

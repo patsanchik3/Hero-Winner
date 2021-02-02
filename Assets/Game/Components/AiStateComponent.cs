@@ -7,11 +7,11 @@ namespace Game.Components
 {
     public class AiStateComponent : IComponent, IDisposable
     {
-        public ReactiveProperty<EAiStates> State { get; set; }
+        public ReactiveProperty<EAiState> State { get; set; }
 
         public AiStateComponent()
         {
-            State = new ReactiveProperty<EAiStates>(EAiStates.Idle);
+            State = new ReactiveProperty<EAiState>(EAiState.Idle);
         }
 
         public void Dispose()

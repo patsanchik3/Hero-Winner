@@ -5,6 +5,6 @@ namespace Game.Components
 {
     public class BotViewComponent : IComponent
     {
-        public BotView BotView;
+        public IBotView BotView;
     }
 }
