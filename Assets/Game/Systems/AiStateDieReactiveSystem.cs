@@ -1,42 +1,25 @@
 using System;
-using EcsRx.Collections.Database;
 using EcsRx.Entities;
 using EcsRx.Extensions;
 using EcsRx.Groups;
-using EcsRx.Groups.Observable;
 using EcsRx.Plugins.ReactiveSystems.Systems;
-using EcsRx.Systems;
 using Game.Components;
 using Game.Enums;
 using Game.Settings;
 using UniRx;
-using UnityEngine;
 
 namespace Game.Systems
 {
-    public class AiStateDieReactiveSystem : IReactToEntitySystem, IManualSystem
+    public class AiStateDieReactiveSystem : IReactToEntitySystem
     {
-        private readonly IEntityDatabase _entityDatabase;
         private readonly IGameSettings _gameSettings;
-        private readonly CompositeDisposable _disposable = new CompositeDisposable();
 
-        public AiStateDieReactiveSystem(IEntityDatabase entityDatabase, IGameSettings gameSettings)
+        public AiStateDieReactiveSystem(IGameSettings gameSettings)
         {
-            _entityDatabase = entityDatabase;
             _gameSettings = gameSettings;
         }
 
-        public void StartSystem(IObservableGroup observableGroup)
-        {
-        }
-
-        public void StopSystem(IObservableGroup observableGroup)
-        {
-            _disposable?.Dispose();
-        }
-
         public IGroup Group => new Group(typeof(AiStateComponent));
-
         public IObservable<IEntity> ReactToEntity(IEntity entity)
         {
             var aiStateComponent = entity.GetComponent<AiStateComponent>();
@@ -45,19 +28,11 @@ namespace Game.Systems
 
         public void Process(IEntity entity)
         {
-            Debug.Log("Process");
-            var botView =  entity.GetComponent<BotViewComponent>().BotView;
+            var botView = entity.GetComponent<BotViewComponent>().BotView;
             botView.PlayAnimation(AnimationStates.Die);
-            
-            Observable.Timer(TimeSpan.FromSeconds(_gameSettings.DestroyBotTimeSeconds))
-                .Subscribe(_ => DestroyEntity(entity))
-                .AddTo(_disposable);
-        }
 
-        private void DestroyEntity(IEntity entity)
-        {
-            var entityCollection = _entityDatabase.GetCollectionFor(entity);
-            entityCollection.RemoveEntity(entity.Id);
+            var selfDestructComponent = entity.AddComponent<SelfDestructComponent>();
+            selfDestructComponent.Lifetime = _gameSettings.DestroyBotTimeSeconds;
         }
     }
 }

@@ -19,8 +19,7 @@ namespace Game.Blueprints
         {
             entity.AddComponent<BotComponent>();
             entity.AddComponent<ViewComponent>();
-            var aiState = entity.AddComponent<AiStateComponent>();
-            aiState.State.Value = _startState;
+            entity.AddComponent<AiStateComponent>().State.Value = _startState;
         }
     }
 }

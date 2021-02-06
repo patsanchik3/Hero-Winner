@@ -11,6 +11,7 @@ namespace Game.Installers
             this.BindSystem<BotSpawnSystem>();
             this.BindSystem<BotViewResolver>();
             this.BindSystem<AiStateDieReactiveSystem>();
+            this.BindSystem<SelfDestructionSystem>();
         }
     }
 }
